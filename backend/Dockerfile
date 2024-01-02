@@ -9,7 +9,7 @@ LABEL description="Service contenant les memes"
 ENV SERVER_PORT=8080
 
 #[ARGS]
-ARG JAR_FILE=target/TP_Composants-*.jar
+ARG JAR_FILE=target/backend-*.jar
 
 #[USER]
 RUN  addgroup --system user \
