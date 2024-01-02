@@ -9,7 +9,7 @@
         </div>
         <div>
             <label>Lien: </label>
-            <input type="text" v-model="meme.lien">
+            <input type="text" v-model="meme.link" v-bind:disabled="isInputDisabled">
         </div>
         <div>
             <label>Description: </label>
@@ -32,6 +32,7 @@
     </div>
 </template>
 <script>
+import MemeService from '@/service/MemeService'
 export default{
     name: 'NewMemeView',
     data(){
@@ -44,8 +45,29 @@ export default{
             }
         }
     },
+    beforeMount(){
+        this.name = this.$route.name
+        this.isInputDisabled = false;
+        if (this.name === 'update'){
+            this.id = this.$route.params.id;
+            this.getMeme(this.id);
+            this.isInputDisabled = true;
+        }
+    },
     methods: {
+        async getMeme(id){
+            try{
+                let response = await MemeService.getMeme(id);
+                this.meme = response;
+                //this.meme = response.data;
+            }
+            catch (error){
+                console.log('Erreur');
+            }
+        },
         async confirmer(){
+            //TODO
+            //Changer Update / delete en fonction du truc
             alert("Confirmation")
         }
     }

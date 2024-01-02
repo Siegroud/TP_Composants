@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import NewMemeView from '../views/NewMemeView.vue'
+import MemeView from '../views/MemeView.vue'
 
 const routes = [
   {
@@ -12,6 +13,16 @@ const routes = [
     path: '/new',
     name: 'newMeme',
     component: NewMemeView
+  },
+  {
+    path: '/update:id',
+    name: 'update',
+    component: NewMemeView
+  },
+  {
+    path: '/meme:id',
+    name: 'memeView',
+    component: MemeView
   },
   {
     path: '/about',

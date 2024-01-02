@@ -1,62 +1,11 @@
 <template>
   <nav>
     <router-link to="/new">Créer</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link>
   </nav>
-  <div>
-    <div v-for="meme in listMeme">
-      <h3>{{ meme.title }}</h3>
-      <p style="color: #808080;"> {{ meme.tag }}</p>
-      <img :src="meme.link" :alt="meme.title" >
-      <div class="line-container">
-        <hr>
-      </div>
-    </div>
-  </div>
+  <router-view/>
 </template>
-<script>
-import MemeService from '@/service/MemeService'
-export default{
-  name: 'App',
-  data(){
-    return {
-      listMeme: []
-    }
-  },
-  beforeMount(){
-    this.getMemeList();
-  },
-  methods: {
-    async getMemeList(){
-        try{
-            let response = await MemeService.getAllMeme();
-            this.listMeme = response;
-            //this.listMeme = response.data;
-        }
-        catch(error){
-            console.log(error);
-        }
-    },
-  }
-}
-</script>
 <style>
-img{
-  max-width: 600px;
-  max-height: 400px;
-  width: auto;
-  height: auto;
-}
-hr {
-  width: 600px;
-  border: 1px solid #000000; /* Optional: Set border color for better visibility */
-  margin: 20px 0; /* Optional: Add margin for spacing */
-}
-.line-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
