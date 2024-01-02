@@ -16,8 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemeService {
 
-    private final MemeMapper memeMapper;
-
     private final MemeRepository memeRepository;
 
     /**
