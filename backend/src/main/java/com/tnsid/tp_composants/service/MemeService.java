@@ -56,8 +56,7 @@ public class MemeService {
      * @return The matching {@link Meme} or null if it doesn't exist
      */
     public Meme getById(String memeId){
-        return memeRepository.findById(new ObjectId(memeId))
-                .orElse(null);
+        return memeRepository.findById(memeId);
     }
 
 
