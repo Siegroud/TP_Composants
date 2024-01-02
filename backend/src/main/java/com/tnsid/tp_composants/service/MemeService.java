@@ -1,6 +1,7 @@
 package com.tnsid.tp_composants.service;
 
 import com.tnsid.tp_composants.api.request.MemeCreationRequest;
+import com.tnsid.tp_composants.api.request.MemeUpdateRequest;
 import com.tnsid.tp_composants.constant.TagEnum;
 import com.tnsid.tp_composants.entity.Meme;
 import com.tnsid.tp_composants.mapper.MemeMapper;
@@ -21,8 +22,8 @@ public class MemeService {
     /**
      * Creates an {@link Meme} from a request
      *
-     * @param request The request containing {@link Meme}'s data
-     * @return The created {@link Meme}
+     * @param request   The request containing {@link Meme}'s data
+     * @return          The created {@link Meme}
      */
     public Meme create(MemeCreationRequest request){
         final Meme meme = Meme.builder()
@@ -38,8 +39,8 @@ public class MemeService {
     /**
      * Gets every known {@link Meme}
      *
-     * @param tags A list of tags to filter on. Ignore if null or empty provided.
-     * @return A list of known {@link Meme}s
+     * @param tags  A list of tags to filter on. Ignore if null or empty provided.
+     * @return      A list of known {@link Meme}s
      */
     public List<Meme> getAll(List<TagEnum> tags){
         if (CollectionUtils.isEmpty(tags)){
@@ -52,12 +53,41 @@ public class MemeService {
     /**
      * Gets a {@link Meme} from its id
      *
-     * @param memeId The id of the desired {@link Meme}
-     * @return The matching {@link Meme} or null if it doesn't exist
+     * @param memeId    The id of the desired {@link Meme}
+     * @return          The matching {@link Meme} or null if it doesn't exist
      */
     public Meme getById(String memeId){
-        return memeRepository.findById(memeId);
+        return memeRepository.findById(new ObjectId(memeId)).orElse(null);
     }
+
+    /**
+     * Updates a {@link Meme} from a request
+     *
+     * @param memeId    The id of the {@link Meme} to update
+     * @param request   The request containing {@link Meme}'s data to update
+     * @return          The updated {@link Meme}
+     */
+    public Meme update(String memeId, MemeUpdateRequest request){
+        return memeRepository.findById(new ObjectId(memeId))
+                .map(meme -> {
+                    meme.setTitle(request.getTitle());
+                    meme.setDescription(request.getDescription());
+                    meme.setTag(request.getTag());
+
+                    return memeRepository.save(meme);
+                })
+                .orElse(null);
+    }
+
+
+    /**
+     * Deletes the {@link Meme} with the provided id
+     *
+     * @param memeId    The id of the {@link Meme} to delete
+     */
+    public void delete(String memeId){ memeRepository.deleteById(new ObjectId(memeId));}
+
+
 
 
 }

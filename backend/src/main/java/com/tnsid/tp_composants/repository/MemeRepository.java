@@ -10,7 +10,5 @@ import java.util.List;
 public interface MemeRepository extends MongoRepository<Meme, ObjectId> {
     List<Meme> findByTitle(String title);
 
-    Meme findById(String id);
-
     List<Meme> findAllByTagIn(Iterable<TagEnum> tags);
 }

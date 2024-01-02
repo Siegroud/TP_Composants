@@ -2,6 +2,7 @@ package com.tnsid.tp_composants.controller;
 
 import com.tnsid.tp_composants.api.dto.MemeDto;
 import com.tnsid.tp_composants.api.request.MemeCreationRequest;
+import com.tnsid.tp_composants.api.request.MemeUpdateRequest;
 import com.tnsid.tp_composants.api.response.MemesResponse;
 import com.tnsid.tp_composants.constant.TagEnum;
 import com.tnsid.tp_composants.entity.Meme;
@@ -111,6 +112,72 @@ public class MemeController {
         final MemeDto dto = memeMapper.toDto(meme);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+
+    @PutMapping("/{memeId}")
+    @GetMapping("/{memeId}")
+    @Operation(
+            summary = "Update a meme by id",
+            description = "Update the meme with the provided id.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Response in case of success",
+                            content = @Content(mediaType = "application/json", schema = @Schema(allOf = MemeDto.class))
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Response if the provided data is not valid",
+                            content = @Content(mediaType = "application/json")
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "No meme is matching the provided id."
+                    )
+            }
+    )
+    public ResponseEntity<MemeDto> updateMeme(
+            @PathVariable
+            @Parameter(description = "The id of the meme")
+            String memeId,
+
+            @Valid
+            @RequestBody
+            MemeUpdateRequest request
+    ){
+        final Meme meme = memeService.update(memeId,request);
+
+        return meme != null
+                ? ResponseEntity.ok(memeMapper.toDto(meme))
+                : ResponseEntity.notFound().build();
+    }
+
+
+    @DeleteMapping("/{memeId}")
+    @GetMapping("/{memeId}")
+    @Operation(
+            summary = "Delete a meme by id",
+            description = "Delete the meme with the provided id.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Response if the meme has been successfully deleted"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "No meme is matching the provided id."
+                    )
+            }
+    )
+    public ResponseEntity<Void> deleteMeme(
+            @Parameter(description = "The id of the meme to delete")
+            @PathVariable
+            String memeId
+    ) {
+        memeService.delete(memeId);
+
+        return ResponseEntity.accepted().build();
     }
 
 
