@@ -1,1 +1,6 @@
-
+spring:
+  data:
+    mongodb:
+      uri: ${DB_URL:mongodb://localhost:27017}
+      database: ${BD_NAME:meme_service_db}
+      auto-index-creation: true
