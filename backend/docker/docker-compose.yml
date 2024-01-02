@@ -9,3 +9,6 @@ services:
       MONGO_INITDB_DATABASE: meme_service_db
     volumes:
       - db:/data/db/
+
+volumes:
+  db:
