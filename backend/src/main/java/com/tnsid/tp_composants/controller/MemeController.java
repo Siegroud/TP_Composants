@@ -28,6 +28,7 @@ import java.util.List;
 @RequestMapping("/memes")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8081/", methods = {RequestMethod.PUT,RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE})
 @Tag(
         name = "Meme controller",
         description = "APIS used to manage memes"
@@ -177,7 +178,7 @@ public class MemeController {
     ) {
         memeService.delete(memeId);
 
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.noContent().build();
     }
 
 
