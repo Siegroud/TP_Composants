@@ -1,3 +1,5 @@
+import InstanceAxios from "./index";
+
 class MemeService{
     getAllMeme(){
         return [
