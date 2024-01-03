@@ -40,7 +40,7 @@ export default {
         async supprimer(){
             try {
                 await MemeService.deleteMeme(this.id);
-                this.$router.push('home');
+                this.$router.push('/');
             } catch (error){
                 alert("Erreur lors de la supression du meme");
             }

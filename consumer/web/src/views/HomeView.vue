@@ -1,6 +1,9 @@
 <template>
 <div>
-  <div v-for="meme in listMeme" :key="meme.id" @click="goMeme(meme.id)" class="hover-div">
+  <div v-if="emptyList">
+    <h1>No memes ?</h1>
+  </div>
+  <div v-else v-for="meme in listMeme" :key="meme.id" @click="goMeme(meme.id)" class="hover-div">
     <h3>{{ meme.title }}</h3>
     <p style="color: #808080;"> {{ meme.tag }}</p>
     <img :src="meme.link" :alt="meme.title" >
@@ -28,6 +31,11 @@ methods: {
           let response = await MemeService.getAllMeme();
           //this.listMeme = response;
           this.listMeme = response.data.memes;
+          if (this.listMeme.length == 0){
+            this.emptyList = true;
+          } else {
+            this.emptyList = false;
+          }
           console.log(this.listMeme.memes);
       }
       catch(error){

@@ -69,7 +69,13 @@ export default{
             //TODO
             //Changer Update / delete en fonction du truc
             if (this.name === 'update'){
-
+                try {
+                    let response = await MemeService.putMeme(this.id, this.meme);
+                    console.log(response.data);
+                    this.$router.push('/');
+                } catch (error){
+                    alert("Erreur lors de la création du meme");
+                }
             } else {
                 try {
                     let response = await MemeService.postMeme(this.meme);
