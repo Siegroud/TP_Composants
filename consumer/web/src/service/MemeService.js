@@ -1,7 +1,12 @@
-import InstanceAxios from "./index";
+import InstanceAxios from 'axios';
+const url = 'http://localhost:'
+const port = '8080'
+
+const path = `${url}${port}/memes`
 
 class MemeService{
     getAllMeme(){
+        return InstanceAxios.get(path);
         return [
             {
                 title: "Instalation Wizard",
@@ -27,6 +32,7 @@ class MemeService{
         ]
     }
     getMeme(id){
+        return InstanceAxios.get(`${path}/${id}`);
         if (id === '1')
             return {
                 title: "Instalation Wizard",
@@ -52,6 +58,12 @@ class MemeService{
                 id: '3'
             }
         return null;
+    }
+    postMeme(meme){
+        return InstanceAxios.post(path, meme)
+    }
+    deleteMeme(id){
+        return InstanceAxios.delete(`${path}/${id}`);
     }
 }
 

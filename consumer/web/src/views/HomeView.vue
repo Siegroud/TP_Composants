@@ -26,8 +26,9 @@ methods: {
   async getMemeList(){
       try{
           let response = await MemeService.getAllMeme();
-          this.listMeme = response;
-          //this.listMeme = response.data;
+          //this.listMeme = response;
+          this.listMeme = response.data.memes;
+          console.log(this.listMeme.memes);
       }
       catch(error){
           console.log(error);

@@ -58,8 +58,8 @@ export default{
         async getMeme(id){
             try{
                 let response = await MemeService.getMeme(id);
-                this.meme = response;
-                //this.meme = response.data;
+                //this.meme = response;
+                this.meme = response.data;
             }
             catch (error){
                 console.log('Erreur');
@@ -68,7 +68,17 @@ export default{
         async confirmer(){
             //TODO
             //Changer Update / delete en fonction du truc
-            alert("Confirmation")
+            if (this.name === 'update'){
+
+            } else {
+                try {
+                    let response = await MemeService.postMeme(this.meme);
+                    console.log(response.data);
+                    this.$router.push('/');
+                } catch (error){
+                    alert("Erreur lors de la création du meme");
+                }
+            }
         }
     }
 }
