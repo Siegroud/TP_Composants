@@ -31,15 +31,19 @@ export default {
         async getMeme(id){
             try{
                 let response = await MemeService.getMeme(id);
-                this.meme = response;
-                //this.meme = response.data;
+                this.meme = response.data;
             }
             catch (error){
                 console.log('Erreur');
             }
         },
         async supprimer(){
-            alert("Suppression")
+            try {
+                await MemeService.deleteMeme(this.id);
+                this.$router.push('/');
+            } catch (error){
+                alert("Erreur lors de la supression du meme");
+            }
         }
     }
 }
