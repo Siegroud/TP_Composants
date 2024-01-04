@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Construction du backend..."
 cd ../backend
-mvn install
+mvn clean package
 docker build -t my-ms:0.1 .
 
 echo "Construction du frontend...\n"

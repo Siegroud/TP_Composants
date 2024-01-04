@@ -2,7 +2,7 @@
 
 ## Instalation et éxecution
 
-Executez le fichier run.sh se trouvant dans ce avec dossier `sh run.sh` ou `./run.sh`. En cas de problème, se référer à la section [problème connus](#problèmes-connus).
+Executez le fichier run.sh dans ce dossier `sh run.sh` ou `./run.sh`. En cas de problème, se référer à la section [problème connus](#problèmes-connus).
 
 Ce script compile le backend avec maven puis crée l'image docker. Ensuite il crée l'image docker pour le frontend (consumer/web). Enfin, il éxecute [le fichier docker compose.](docker-compose.yml)
 
