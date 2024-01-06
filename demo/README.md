@@ -8,6 +8,11 @@ Ce script compile le backend avec maven puis crée l'image docker. Il crée ensu
 
 Un front end sera alors disponible sur http://localhost:8081/ (Il est possible que le front end mette un peu de temps à démarrer)
 
+Le swagger peut être consulté via le lien http://localhost:8080/swagger-ui/index.html. 
+
+Voici le lien du repository GitHub pour consulter le projet : https://github.com/Siegroud/TP_Composants 
+
+
 ## Fonctionalités
 
 Avec l'interface, les éléments du CRUDs sont disponibles:
